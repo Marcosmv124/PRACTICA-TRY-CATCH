@@ -19,13 +19,13 @@ jobs:
           dotnet-version: '6.0'
 
       - name: Restore dependencies
-        run: dotnet restore "excepciones-cSharp.sln"
+        run: dotnet restore "excepciones - cSharp/excepciones - cSharp.sln"
 
       - name: Build
-        run: dotnet build "excepciones-cSharp.sln" --configuration Release
+        run: dotnet build "excepciones - cSharp/excepciones - cSharp.sln" --configuration Release
 
       - name: Run tests
-        run: dotnet test "excepciones-cSharp.sln"
+        run: dotnet test "excepciones - cSharp/excepciones - cSharp.sln"
 
       - name: Install SonarScanner
         run: |
