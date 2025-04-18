@@ -41,7 +41,7 @@ jobs:
       # Begin SonarQube Analysis
       - name: Begin SonarQube Analysis
         run: |
-          dotnet sonarscanner begin /k:"PRACTICA-TRY-CATCH" /d:sonar.login="d2f80d1202bc9d646fe554c02f0fc5116a954738" /o:"MARCOS_MARTINEZ_VALDEZ" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet sonarscanner begin /k:"PRACTICA-TRY-CATCH" /d:sonar.login="d2f80d1202bc9d646fe554c02f0fc5116a954738" /o:"marcosmv124" /d:sonar.host.url="https://sonarcloud.io"
 
       # Build the project again after sonar begin
       - name: Rebuild project
