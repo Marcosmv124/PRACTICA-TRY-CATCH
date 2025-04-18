@@ -11,27 +11,43 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      # Checkout the repository
       - uses: actions/checkout@v3
 
+      # Setup .NET SDK
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.0'
+          dotnet-version: '6.0'  # Puedes usar la versión que necesites (como '5.0', '3.1', etc.)
 
+      # Restore dependencies (if any)
+      - name: Restore dependencies
+        run: dotnet restore "excepciones - cSharp/excepciones - cSharp.sln"
+
+      # Build the project
       - name: Build
         run: dotnet build "excepciones - cSharp/excepciones - cSharp.sln" --configuration Release
 
+      # Run unit tests (optional, if you have tests)
       - name: Run tests
         run: dotnet test "excepciones - cSharp/excepciones - cSharp.sln"
 
+      # Install SonarScanner tool
       - name: Install SonarScanner
         run: |
           dotnet tool install --global dotnet-sonarscanner
           echo "$env:PATH"
 
-      - name: Run SonarQube Analysis
+      # Begin SonarQube Analysis
+      - name: Begin SonarQube Analysis
         run: |
-         dotnet sonarscanner begin /k:"PRACTICA-TRY-CATCH" /d:sonar.login="d2f80d1202bc9d646fe554c02f0fc5116a954738" /o:"MARCOS_MARTINEZ_VALDEZ" /d:sonar.host.url="https://sonarcloud.io"
-         dotnet build "excepciones - cSharp/excepciones - cSharp.sln"
-         dotnet sonarscanner end /d:sonar.login="d2f80d1202bc9d646fe554c02f0fc5116a954738"
+          dotnet sonarscanner begin /k:"PRACTICA-TRY-CATCH" /d:sonar.login="d2f80d1202bc9d646fe554c02f0fc5116a954738" /o:"MARCOS_MARTINEZ_VALDEZ" /d:sonar.host.url="https://sonarcloud.io"
 
+      # Build the project again after sonar begin
+      - name: Rebuild project
+        run: dotnet build "excepciones - cSharp/excepciones - cSharp.sln" --configuration Release
+
+      # End SonarQube Analysis
+      - name: End SonarQube Analysis
+        run: |
+          dotnet sonarscanner end /d:sonar.login="d2f80d1202bc9d646fe554c02f0fc5116a954738"
