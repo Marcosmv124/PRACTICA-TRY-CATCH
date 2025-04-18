@@ -40,13 +40,13 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
+          shell: powershell
         run: |
-          # Cambié el paso de begin para incluir el archivo .sln
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Marcosmv124_PRACTICA-TRY-CATCH" /o:"marcosmv124" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.sln="path/to/your/solution.sln"
+          # Ejecutar el scanner de SonarCloud
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Marcosmv124_PRACTICA-TRY-CATCH" /o:"marcosmv124" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           
-           # Compilar la solución, solo necesitas el nombre del archivo .sln (sin la ruta completa)
-           dotnet build "excepciones - cSharp.sln"
+          # Especificar la ruta completa al archivo .sln si es necesario
+          dotnet build "excepciones - cSharp\excepciones - cSharp.sln"
           
           # Finalizar el análisis
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
