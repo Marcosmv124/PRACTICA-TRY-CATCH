@@ -37,4 +37,3 @@ jobs:
           dotnet sonarscanner begin /k:"PRACTICA-TRY-CATCH" /d:sonar.login="1f904231c6fc0418446767db233e4e57567d7b81"
           dotnet build "excepciones - cSharp.sln"
           dotnet sonarscanner end /d:sonar.login="1f904231c6fc0418446767db233e4e57567d7b81"
-
