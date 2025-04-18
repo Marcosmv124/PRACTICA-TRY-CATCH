@@ -31,6 +31,6 @@ jobs:
 
       - name: Run SonarQube Analysis
         run: |
-          dotnet sonarscanner begin /k:"PRACTICA-TRY-CATCH" /d:sonar.login="1f904231c6fc0418446767db233e4e57567d7b81" /d:sonar.organization="MARCOS MARTINEZ VALDEZ"
-          dotnet build "excepciones - cSharp.sln"
+          dotnet sonarscanner begin /k:"PRACTICA-TRY-CATCH" /d:sonar.login="1f904231c6fc0418446767db233e4e57567d7b81" /o:"MARCOS_MARTINEZ_VALDEZ"
+          dotnet build "excepciones - cSharp/excepciones - cSharp.sln"
           dotnet sonarscanner end /d:sonar.login="1f904231c6fc0418446767db233e4e57567d7b81"
