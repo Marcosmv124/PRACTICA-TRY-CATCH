@@ -14,10 +14,10 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available.
+          distribution: 'zulu'
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
       - name: Cache SonarQube Cloud packages
         uses: actions/cache@v4
         with:
@@ -42,6 +42,11 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Marcosmv124_PRACTICA-TRY-CATCH" /o:"marcosmv124" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build
+          # Cambié el paso de begin para incluir el archivo .sln
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Marcosmv124_PRACTICA-TRY-CATCH" /o:"marcosmv124" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.sln="path/to/your/solution.sln"
+          
+           # Compilar la solución, solo necesitas el nombre del archivo .sln (sin la ruta completa)
+           dotnet build "excepciones - cSharp.sln"
+          
+          # Finalizar el análisis
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
